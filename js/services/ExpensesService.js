@@ -1,0 +1,29 @@
+import { RestService } from './RestService';
+import md5 from 'md5';
+
+export class ExpensesService extends RestService {
+
+  loadOverview() {
+    return super.get('/expenses/overview');
+  }
+
+  loadExpenses(pageNumber) {
+    return super.get('/expenses', { params: {page: pageNumber} } );
+  }
+
+  loadById(id) {
+    return super.get('/expenses/' + id);
+  }
+
+  delete(id) {
+    return super.delete('/expenses/' + id);
+  }
+
+  update(id, expense) {
+    return super.put('/expenses/' + id, expense);
+  }
+
+  add(expense) {
+    return super.post('/expenses', expense);
+  }
+}

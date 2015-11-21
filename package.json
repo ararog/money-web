@@ -1,0 +1,53 @@
+{
+  "name": "money",
+  "version": "1.0.0",
+  "description": "React frontend of money app",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.7.0",
+    "chart.js": "^1.0.2",
+    "express": "4.7.2",
+    "history": "^1.12.5",
+    "jimple": "^1.1.0",
+    "lodash": "3.2.0",
+    "md5": "^2.0.0",
+    "rc-chartjs": "^0.7.1",
+    "react": "^0.14.2",
+    "react-bootstrap": "^0.28.1",
+    "react-dom": "^0.14.0",
+    "react-redux": "0.9.0",
+    "react-router": "1.0.0",
+    "redux": "1.0.1",
+    "redux-actions": "0.8.0",
+    "serve-static": "1.9.2",
+    "yargs": "3.5.3"
+  },
+  "devDependencies": {
+    "babel": "^5.4.7",
+    "babel-core": "^5.4.7",
+    "babel-eslint": "^3.1.23",
+    "babel-loader": "^5.0.0",
+    "babel-plugin-react-transform": "^1.1.1",
+    "eslint": "^1.3.1",
+    "eslint-plugin-react": "^2.3.0",
+    "css-loader": "0.14.0",
+    "expose-loader": "^0.7.1",
+    "sass-loader": "^3.1.1",
+    "style-loader": "0.12.0",
+    "node-bourbon": "^4.2.3",
+    "node-sass": "^3.4.1",
+    "react-transform-catch-errors": "^1.0.0",
+    "react-transform-hmr": "^1.0.0",
+    "webpack": "^1.12.3",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-dev": "node server/development",
+    "start": "node server/production",
+    "lint": "eslint js"
+  },
+  "author": "Rogerio Pereira Araujo",
+  "license": "MIT"
+}
