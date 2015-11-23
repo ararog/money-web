@@ -17,20 +17,19 @@ const history = useBasename(createHistory)({
 
 class MoneyApp extends React.Component {
 
-  render() {
-    return (<div>{this.props.children}</div>)
-  }
+    render() {
+        return (<div>{this.props.children}</div>)
+    }
 }
 
 function requireAuth(nextState, replaceState) {
-  if (! localStorage.getItem('token'))
-    replaceState({ nextPathname: nextState.location.pathname }, '/login')
+    if (! localStorage.getItem('token'))
+        replaceState({ nextPathname: nextState.location.pathname }, '/login')
 }
 
 // default behavior
 function createElement(Component, props) {
-  // make sure you pass all the props in!
-  return <Component container={container} {...props}/>
+    return <Component container={container} {...props}/>
 }
 
 render((

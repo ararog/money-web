@@ -31,8 +31,8 @@ class Overview extends React.Component {
 
     render() {
 
-        var lastMonthsChart;
-        var pendingItems;
+        var lastMonthsChart
+        var pendingItems
         var months = []
         var amounts = []
 
