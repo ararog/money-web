@@ -23,4 +23,12 @@ export class RestService {
   get(path, data) {
     return axios.get(this.base + path, data);
   }
+
+  delete(path, data) {
+    return axios.delete(this.base + path);
+  }
+
+  put(path, data) {
+    return axios.put(this.base + path, data);
+  }
 }
