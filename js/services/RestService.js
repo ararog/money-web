@@ -20,11 +20,11 @@ export class RestService {
     return axios.post(this.base + path, data);
   }
 
-  get(path, data) {
-    return axios.get(this.base + path, data);
+  get(path) {
+    return axios.get(this.base + path);
   }
 
-  delete(path, data) {
+  delete(path) {
     return axios.delete(this.base + path);
   }
 

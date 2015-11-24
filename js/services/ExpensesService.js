@@ -1,5 +1,4 @@
 import { RestService } from './RestService';
-import md5 from 'md5';
 
 export class ExpensesService extends RestService {
 
