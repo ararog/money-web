@@ -37,7 +37,7 @@ function requireAuth(nextState, replaceState) {
 
 // default behavior
 function createElement(Component, props) {
-    return <Component container={container} {...props}/>
+    return <Component {...props}/>
 }
 
 const logger = createLogger()

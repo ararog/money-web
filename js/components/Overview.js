@@ -1,5 +1,9 @@
 import * as React from 'react';
 import { Bar as BarChart } from 'rc-chartjs';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import * as expensesActions from '../actions/expenses';
 
 var chartOptions = {
     animation: false,
@@ -18,15 +22,12 @@ class Overview extends React.Component {
 
     componentDidMount() {
 
-        this.props.container.get('EXPENSES_SERVICE')
-        .loadOverview()
-        .then(response => {
-            this.setState(
-                { pending: response.data.pending, lastMonths: response.data.lastMonths })
-            })
-        .catch(function (response) {
-            console.log(response);
-        });
+        this.props.loadOverview()
+        /*
+        this.setState(
+            { pending: response.data.pending, lastMonths: response.data.lastMonths })
+        })
+        */        
     }
 
     render() {
@@ -87,4 +88,14 @@ class Overview extends React.Component {
     }
 }
 
-export default Overview;
+function stateToProps(state) {
+  let { expenses } = state
+  return { expenses }
+}
+
+function dispatchToProps(dispatch) {
+  let actions = _.extend({}, expensesActions)
+  return bindActionCreators(actions, dispatch)
+}
+
+export default connect(stateToProps, dispatchToProps)(Overview)

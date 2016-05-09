@@ -1,5 +1,10 @@
 import * as React from 'react';
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import * as usersActions from '../actions/users';
+
 require('../../css/login.scss')
 
 class Login extends React.Component {
@@ -35,4 +40,14 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+function stateToProps(state) {
+  let { users } = state
+  return { users }
+}
+
+function dispatchToProps(dispatch) {
+  let actions = _.extend({}, usersActions)
+  return bindActionCreators(actions, dispatch)
+}
+
+export default connect(stateToProps, dispatchToProps)(Login)

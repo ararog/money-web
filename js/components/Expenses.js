@@ -1,5 +1,9 @@
 import * as React from 'react';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { Pagination } from 'react-bootstrap';
+
+import * as expensesActions from '../actions/expenses';
 
 class TableRow extends React.Component {
 
@@ -36,14 +40,8 @@ class Expenses extends React.Component {
   }
 
   paginate(page) {
-    this.props.container.get('EXPENSES_SERVICE')
-    .loadExpenses(page)
-    .then(response => {
-      this.setState({activePage: page, itemCount: response.data.total / 10, items: response.data.items })
-    })
-    .catch(function (response) {
-      console.log(response)
-    });
+    this.props.fetchExpenses(page)
+    //this.setState({activePage: page, itemCount: response.data.total / 10, items: response.data.items })
   }
 
   render() {
@@ -83,4 +81,14 @@ class Expenses extends React.Component {
   }
 }
 
-export default Expenses;
+function stateToProps(state) {
+  let { expenses } = state
+  return { expenses }
+}
+
+function dispatchToProps(dispatch) {
+  let actions = _.extend({}, expensesActions)
+  return bindActionCreators(actions, dispatch)
+}
+
+export default connect(stateToProps, dispatchToProps)(Expenses)
