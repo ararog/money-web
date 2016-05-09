@@ -1,3 +1,5 @@
+import { get, post, put, delete } from './api'
+
 import {
     LOAD_OVERVIEW,
     LOAD_OVERVIEW_SUCCESS,
@@ -15,9 +17,7 @@ export function fetchExpenses(page) {
 
         dispatch(startFetchingExpenses(page))
 
-        return doFetch('posts/best', {
-            method: 'GET'
-        }).then(data => {
+        return get('posts/best').then(data => {
             dispatch(fetchExpensesSuccess(data))
         }).catch(err => {
             dispatch(fetchExpensesError(err))
@@ -53,26 +53,26 @@ function fetchExpensesError(error) {
 }
 
 
-loadOverview() {
-  return super.get('/expenses/overview');
+export function loadOverview() {
+  return get('/expenses/overview');
 }
 
-loadExpenses(pageNumber) {
-  return super.get('/expenses', { params: {page: pageNumber} } );
+export function loadExpenses(pageNumber) {
+  return get('/expenses', { params: {page: pageNumber} } );
 }
 
-loadById(id) {
-  return super.get('/expenses/' + id);
+export function loadExpenseById(id) {
+  return get('/expenses/' + id);
 }
 
-delete(id) {
-  return super.delete('/expenses/' + id);
+export function deleteExpense(id) {
+  return delete('/expenses/' + id);
 }
 
-update(id, expense) {
-  return super.put('/expenses/' + id, expense);
+export function updateExpense(id, expense) {
+  return put('/expenses/' + id, expense);
 }
 
-add(expense) {
-  return super.post('/expenses', expense);
+export function addExpense(expense) {
+  return post('/expenses', expense);
 }

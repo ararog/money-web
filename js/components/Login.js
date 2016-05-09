@@ -15,14 +15,8 @@ class Login extends React.Component {
     const email = this.refs.email.value
     const password = this.refs.password.value
 
-    this.props.container.get('USERS_SERVICE').login(email, password)
-    .then(response => {
-      localStorage.setItem('token', response.data.auth_token);
-      this.props.history.replaceState(null, '/dashboard/overview')
-    })
-    .catch(function (response) {
-      console.log(response);
-    });
+    this.props.login(email, password)
+    //this.props.history.replaceState(null, '/dashboard/overview')
   }
 
   render() {

@@ -1,5 +1,5 @@
+import { get, post, put, delete } from './api'
 
-
-loadCategories() {
-  return super.get('/categories');
+export function loadCategories() {
+  return get('/categories');
 }
