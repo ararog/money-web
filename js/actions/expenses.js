@@ -26,7 +26,9 @@ export function fetchExpenses(page = 0) {
 
         dispatch(startFetchingExpenses(page))
 
-        return get('posts/best').then(data => {
+        return get('/expenses', {
+            params: {page: pageNumber}
+        }).then(data => {
             dispatch(fetchExpensesSuccess(data))
         }).catch(err => {
             dispatch(fetchExpensesError(err))
@@ -47,7 +49,8 @@ function fetchExpensesSuccess(data) {
     return {
         type: LOAD_EXPENSES_SUCCESS,
         payload: {
-            items: data
+            items: data.items,
+            total: data.total
         }
     }
 }
@@ -84,7 +87,7 @@ function fetchOverviewSuccess(data) {
   return {
       type: LOAD_OVERVIEW_SUCCESS,
       payload: {
-          items: data
+          overview: data
       }
   }
 }
@@ -104,25 +107,23 @@ export function loadExpenseById(id) {
       dispatch(startFetchingExpense(id))
 
       return get(`/expenses/{id}`).then(data => {
-          dispatch(fetchExpenseSuccess())
+          dispatch(fetchExpenseSuccess(data))
       }).catch(err => {
           dispatch(fetchExpenseError(err))
       })
   }
 }
 
-function startFetchingExpense(id) {
+function startFetchingExpense() {
   return {
-      type: LOAD_EXPENSE,
-      payload: {
-          expenseId: id
-      }
+      type: LOAD_EXPENSE
   }
 }
 
-function fetchExpenseSuccess() {
+function fetchExpenseSuccess(expense) {
   return {
-      type: LOAD_EXPENSE_SUCCESS
+      type: LOAD_EXPENSE_SUCCESS,
+      expense
   }
 }
 
@@ -148,12 +149,9 @@ export function deleteExpense(id) {
     }
 }
 
-function startDeletingExpense(id) {
+function startDeletingExpense() {
     return {
-        type: DELETE_EXPENSE,
-        payload: {
-            expenseId: id
-        }
+        type: DELETE_EXPENSE
     }
 }
 
@@ -176,7 +174,7 @@ export function updateExpense(id, expense) {
 
   return dispatch => {
 
-      dispatch(startUpdatingExpense(expense))
+      dispatch(startUpdatingExpense())
 
       return put(`/expenses/{id}`, expense).then(data => {
           dispatch(updateExpenseSuccess())
@@ -186,12 +184,9 @@ export function updateExpense(id, expense) {
   }
 }
 
-function startUpdatingExpense(expense) {
+function startUpdatingExpense() {
     return {
-        type: UPDATE_EXPENSE,
-        payload: {
-            expenseId: expense
-        }
+        type: UPDATE_EXPENSE
     }
 }
 
@@ -214,7 +209,7 @@ export function addExpense(expense) {
 
   return dispatch => {
 
-      dispatch(startAddingExpense(expense))
+      dispatch(startAddingExpense())
 
       return post('expenses', expense).then(data => {
           dispatch(addExpenseSuccess())
@@ -224,12 +219,9 @@ export function addExpense(expense) {
   }
 }
 
-function startAddingExpense(expense) {
+function startAddingExpense() {
     return {
-        type: ADD_EXPENSE,
-        payload: {
-            expenseId: expense
-        }
+        type: ADD_EXPENSE
     }
 }
 

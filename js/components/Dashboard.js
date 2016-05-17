@@ -1,9 +1,9 @@
-import * as React from 'react';
-import Navbar  from './layout/Navbar';
-import Sidebar from './layout/Sidebar';
-import Overview from './Overview';
+import * as React from 'react'
+import Navbar  from './layout/Navbar'
+import Sidebar from './layout/Sidebar'
+import Overview from './Overview'
 
-require('../../css/dashboard.scss')
+import * from '../../css/dashboard.scss'
 
 class Dashboard extends React.Component {
 

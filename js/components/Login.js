@@ -3,30 +3,51 @@ import * as React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as usersActions from '../actions/users';
+import * as usersActions from '../actions/users'
 
-require('../../css/login.scss')
+import * from '../../css/login.scss'
 
 class Login extends React.Component {
 
-  handleSubmit(event) {
+  constructor(props) {
+      super(props)
+      this.state = {
+          email: '',
+          password: ''
+      }
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+      if(nextProps.isLogged)
+        this.props.history.replaceState(null, '/dashboard/overview')
+  }
+
+  _handleSubmit(event) {
     event.preventDefault()
 
-    const email = this.refs.email.value
-    const password = this.refs.password.value
+    const {email, password} = this.state
 
     this.props.login(email, password)
-    //this.props.history.replaceState(null, '/dashboard/overview')
   }
 
   render() {
+    const {email, password} = this.state
+
     return (
         <div className="wrapper">
-          <form className="form-signin" onSubmit={this.handleSubmit.bind(this)}>
+          <form className="form-signin" onSubmit={this._handleSubmit.bind(this)}>
             <h2 className="form-signin-heading">Please login</h2>
-            <input type="text" ref="email" className="form-control" placeholder="Email Address" required="" autofocus="" />
+            <input type="text"
+                className="form-control"
+                placeholder="Email Address"
+                onChange={() => this.setState({email: email})}
+                required="" autofocus="" value={email} />
             <br/>
-            <input type="password" ref="password" className="form-control" placeholder="Password" required=""/>
+            <input type="password"
+                className="form-control"
+                onChange={() => this.setState({password: password})}
+                placeholder="Password" required="" value={password} />
             <button type="submit" className="btn btn-lg btn-primary btn-block">Login</button>
           </form>
         </div>

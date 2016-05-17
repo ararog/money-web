@@ -7,18 +7,18 @@ import * as expensesActions from '../actions/expenses';
 
 class TableRow extends React.Component {
 
-  itemClicked(event) {
-
-    this.props.history.pushState(
-      null, '/dashboard/expenses/' + this.props.id)
+  _itemClicked(event) {
+    const { id, history } = this.props
+    history.pushState(
+      null, `/dashboard/expenses/{id}`)
   }
 
   render() {
-
+    const { description, amount } = this.props
     return (
-      <tr onClick={this.itemClicked.bind(this)}>
-        <td>{this.props.description}</td>
-        <td>{this.props.amount}</td>
+      <tr onClick={this._itemClicked.bind(this)}>
+        <td>{description}</td>
+        <td>{amount}</td>
       </tr>
     )
   }
@@ -26,28 +26,28 @@ class TableRow extends React.Component {
 
 class Expenses extends React.Component {
 
-  constructor() {
-    super()
-    this.state = {activePage: 1, itemCount: 0, items: []}
+  constructor(props) {
+    super(props)
   }
 
   componentDidMount() {
-    this.paginate(1)
+    this._paginate(1)
   }
 
-  handleSelect(event, selectedEvent) {
-    this.paginate(selectedEvent.eventKey)
+  _handleSelect(event, selectedEvent) {
+    this._paginate(selectedEvent.eventKey)
   }
 
-  paginate(page) {
+  _paginate(page) {
     this.props.fetchExpenses(page)
-    //this.setState({activePage: page, itemCount: response.data.total / 10, items: response.data.items })
   }
 
   render() {
-    var items = this.state.items.map(expense => {
+    const { id, history, expenses } = this.props
+    let itemCount = expenses.total / 10
+    var items = expenses.items.map(expense => {
           return (
-            <TableRow key={this.props.id} {...expense} history={this.props.history} />
+            <TableRow key={id} {...expense} history={history} />
           );
         });
 
@@ -73,9 +73,9 @@ class Expenses extends React.Component {
             last={true}
             next={true}
             prev={true}
-            items={this.state.itemCount}
-            activePage={this.state.activePage}
-            onSelect={this.handleSelect.bind(this)} />
+            items={itemCount}
+            activePage={expense.page}
+            onSelect={this._handleSelect.bind(this)} />
         </div>
     );
   }

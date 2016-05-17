@@ -17,28 +17,23 @@ class Overview extends React.Component {
 
     constructor() {
         super()
-        this.state = { pending: [], lastMonths: [] }
     }
 
     componentDidMount() {
-
         this.props.loadOverview()
-        /*
-        this.setState(
-            { pending: response.data.pending, lastMonths: response.data.lastMonths })
-        })
-        */        
     }
 
     render() {
 
-        var lastMonthsChart
-        var pendingItems
-        var months = []
-        var amounts = []
+        const { expenses } = this.props
 
-        if(this.state.pending) {
-            pendingItems = this.state.pending.map(pending => {
+        let lastMonthsChart
+        let pendingItems
+        let months = []
+        let amounts = []
+
+        if(expenses.overview.pending) {
+            pendingItems = expenses.overview.pending.map(pending => {
                 return (<div className="col-xs-6 col-md-3">
                             <h1>{pending.total.toFixed(2)}</h1>
                             <p>{pending.name}</p>
@@ -46,13 +41,13 @@ class Overview extends React.Component {
             });
         }
 
-        if(this.state.lastMonths) {
-            this.state.lastMonths.forEach(e => {
+        if(expenses.overview.lastMonths) {
+            expenses.overview.lastMonths.forEach(e => {
                 amounts.push(e.total.toFixed(2))
                 months.push(e.name)
             })
 
-            var chartData = {
+            let chartData = {
                 labels: months,
                 datasets: [
                     {

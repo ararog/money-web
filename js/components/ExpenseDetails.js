@@ -1,14 +1,14 @@
-import * as React from 'react';
+import * as React from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as expensesActions from '../actions/expenses';
+import * as expensesActions from '../actions/expenses'
 
 class ExpenseDetails extends React.Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
         description: '',
         amount: 0,
@@ -27,17 +27,18 @@ class ExpenseDetails extends React.Component {
   }
 
   componentDidMount() {
-
     this.props.loadExpenseById(this.props.params.id)
   }
 
-  handleSave(event) {
+  _handleSave(event) {
     event.preventDefault()
 
+    const { description, amount, comment } = this.state
+
     var data = {
-        description: this.state.description,
-        amount: this.state.amount,
-        comment: this.state.comment
+        description: description,
+        amount: amount,
+        comment: comment
     }
 
     if(this.props.params.id)
@@ -46,13 +47,14 @@ class ExpenseDetails extends React.Component {
         this.props.addExpense(data)
   }
 
-  handleDelete(event) {
+  _handleDelete(event) {
     event.preventDefault()
 
     this.props.deleteExpense(this.props.params.id)
   }
 
   render() {
+    const { description, amount, comment } = this.state
 
     return (
       <div className="container">
@@ -66,8 +68,8 @@ class ExpenseDetails extends React.Component {
                 className="form-control"
                 id="description"
                 placeholder="Description"
-                onChange={() => this.setState({description: this.state.description})}
-                value={this.state.description} />
+                onChange={() => this.setState({description: description})}
+                value={description} />
           </div>
           <div class="form-group">
             <label htmlFor="amount">Amount</label>
@@ -75,8 +77,8 @@ class ExpenseDetails extends React.Component {
                 className="form-control"
                 id="amount"
                 placeholder="0.00"
-                onChange={() => this.setState({amount: this.state.amount})}
-                value={this.state.amount} />
+                onChange={() => this.setState({amount:amount})}
+                value={amount} />
           </div>
           <div className="form-group">
             <label htmlFor="comment">Comments</label>
@@ -84,11 +86,11 @@ class ExpenseDetails extends React.Component {
                 id="comment"
                 className="form-control"
                 rows="3"
-                onChange={() => this.setState({comment: this.state.comment})}
-                value={this.state.comment}/>
+                onChange={() => this.setState({comment: comment})}
+                value={comment}/>
           </div>
-          <button type="button" onClick={this.handleSave.bind(this)} className="btn btn-primary">Save</button>
-          <button type="button" onClick={this.handleDelete.bind(this)} className="btn btn-danger">Delete</button>
+          <button type="button" onClick={this._handleSave.bind(this)} className="btn btn-primary">Save</button>
+          <button type="button" onClick={this._handleDelete.bind(this)} className="btn btn-danger">Delete</button>
         </form>
       </div>
     );

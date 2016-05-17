@@ -23,20 +23,69 @@ const initialState = {
   fetchingData: false,
   reloading: false,
   error: undefined,
-  items: []
+  expense: null,
+  page: 0,
+  total: 0,
+  overview: [],
+  expenses: []
 }
 
 export function expenses(state = initialState, action) {
   let { type, payload } = action
 
   switch (type) {
-    case FETCH_NOTIFICATIONS_DATA: {
+    case LOAD_OVERVIEW: {
+      return {...state, fetchingData: true, reloading: payload.reloading}
+    }
+    case LOAD_OVERVIEW_SUCCESS: {
+      return {...state, fetchingData: false, overview: payload.overview}
+    }
+    case LOAD_OVERVIEW_ERROR: {
+      return {...state, fetchingData: false, error: payload.error}
+    }
+    case LOAD_EXPENSES: {
       return {...state, fetchingData: true, page: payload.page, reloading: payload.reloading}
     }
-    case FETCH_NOTIFICATIONS_SUCCESS: {
-      return {...state, fetchingData: false, items: payload.items}
+    case LOAD_EXPENSES_SUCCESS: {
+      return {...state, fetchingData: false, items: payload.items, total: payload.total}
     }
-    case FETCH_NOTIFICATIONS_ERROR: {
+    case LOAD_EXPENSES_ERROR: {
+      return {...state, fetchingData: false, error: payload.error}
+    }
+    case ADD_EXPENSE: {
+      return {...state, fetchingData: true}
+    }
+    case ADD_EXPENSE_SUCCESS: {
+      return {...state, fetchingData: false}
+    }
+    case ADD_EXPENSE_ERROR: {
+      return {...state, fetchingData: false, error: payload.error}
+    }
+    case LOAD_EXPENSE: {
+      return {...state, fetchingData: true}
+    }
+    case LOAD_EXPENSE_SUCCESS: {
+      return {...state, fetchingData: false, expense: payload.expense}
+    }
+    case LOAD_EXPENSE_ERROR: {
+      return {...state, fetchingData: false, error: payload.error}
+    }
+    case UPDATE_EXPENSE: {
+      return {...state, fetchingData: true}
+    }
+    case UPDATE_EXPENSE_SUCCESS: {
+      return {...state, fetchingData: false}
+    }
+    case UPDATE_EXPENSE_ERROR: {
+      return {...state, fetchingData: false, error: payload.error}
+    }
+    case DELETE_EXPENSE: {
+      return {...state, fetchingData: true}
+    }
+    case DELETE_EXPENSE_SUCCESS: {
+      return {...state, fetchingData: false}
+    }
+    case DELETE_EXPENSE_ERROR: {
       return {...state, fetchingData: false, error: payload.error}
     }
   }

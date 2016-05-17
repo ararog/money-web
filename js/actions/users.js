@@ -34,7 +34,7 @@ function loginSuccess(data) {
   return {
       type: LOGIN_SUCCESS,
       payload: {
-          items: data
+          account: data
       }
   }
 }
