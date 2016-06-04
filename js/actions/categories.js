@@ -9,7 +9,7 @@ import {
 export function loadCategories() {
   return dispatch => {
 
-      dispatch(startFetchingCategories(page))
+      dispatch(startFetchingCategories())
 
       return get('/categories').then(data => {
           dispatch(fetchCategoriesSuccess(data))

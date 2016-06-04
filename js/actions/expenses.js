@@ -27,7 +27,7 @@ export function fetchExpenses(page = 0) {
         dispatch(startFetchingExpenses(page))
 
         return get('/expenses', {
-            params: {page: pageNumber}
+            params: {page: page}
         }).then(data => {
             dispatch(fetchExpensesSuccess(data))
         }).catch(err => {
