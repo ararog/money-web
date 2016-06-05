@@ -28,7 +28,6 @@ class Login extends React.Component {
 	}
 
 	ensureNotLoggedIn(props) {
-		console.log(props)
 		const { user, replace, location } = props
 		if (user.isLogged) {
 			replace(location.query.redirect)

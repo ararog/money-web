@@ -12,7 +12,7 @@ class TableRow extends React.Component {
 	_itemClicked() {
 		const { id, history } = this.props
 		history.pushState(
-			null, `/dashboard/expenses/{id}`)
+			null, `/dashboard/expenses/${id}`)
 	}
 
 	render() {

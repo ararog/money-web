@@ -8,7 +8,7 @@ export function autoRehydrated(state=false, action) {
 			let { user = {} } = payload
 			let { account = null } = user
 
-			assignAccessToken(account.auth_token)
+			assignAccessToken(account ? account.auth_token : null)
 
 			return true
 		}

@@ -125,7 +125,9 @@ function startFetchingExpense() {
 function fetchExpenseSuccess(expense) {
 	return {
 		type: LOAD_EXPENSE_SUCCESS,
-		expense
+		payload: {
+			expense
+		}
 	}
 }
 
@@ -143,7 +145,7 @@ export function deleteExpense(id) {
 
 		dispatch(startDeletingExpense(id))
 
-		return delete(`/expenses/{id}`).then(data => {
+		return delete(`/expenses/${id}`).then(data => {
 			dispatch(deleteExpenseSuccess())
 		}).catch(err => {
 			dispatch(deleteExpenseError(err))
@@ -178,7 +180,7 @@ export function updateExpense(id, expense) {
 
 		dispatch(startUpdatingExpense())
 
-		return put(`/expenses/{id}`, expense).then(data => {
+		return put(`/expenses/${id}`, expense).then(data => {
 			dispatch(updateExpenseSuccess())
 		}).catch(err => {
 			dispatch(updateExpenseError(err))

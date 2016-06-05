@@ -18,11 +18,11 @@ class ExpenseDetails extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-
+		const { expenses } = nextProps
 		this.setState({
-			description: nextProps.description,
-			amount: nextProps.amount,
-			comment: nextProps.comment
+			description: expenses.expense.description,
+			amount: expenses.expense.amount,
+			comment: expenses.expense.comment
 		})
 	}
 
@@ -32,7 +32,7 @@ class ExpenseDetails extends React.Component {
 
 	_handleSave(event) {
 		event.preventDefault()
-
+		const { updateExpense, addExpense, params } = this.props
 		const { description, amount, comment } = this.state
 
 		var data = {
@@ -41,10 +41,10 @@ class ExpenseDetails extends React.Component {
 			comment: comment
 		}
 
-		if(this.props.params.id)
-			this.props.updateExpense(this.props.params.id, data)
+		if(params.id)
+			updateExpense(params.id, data)
 		else
-			this.props.addExpense(data)
+			addExpense(data)
 	}
 
 	_handleDelete(event) {

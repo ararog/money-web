@@ -61,11 +61,11 @@ const router = (
 	</Router>
 )
 
-persistStore(store, {storage: localForage})
-
-render((
-	<Provider store={store}>
-		{router}
-	</Provider>
-),
-document.getElementById('moneyapp'))
+persistStore(store, {storage: localForage, blacklist: ['routing']}, () => {
+	render((
+		<Provider store={store}>
+			{router}
+		</Provider>
+	),
+	document.getElementById('moneyapp'))
+})
