@@ -1,20 +1,28 @@
-import * as React from 'react';
-import { Link } from 'react-router';
+import * as React from 'react'
+import { Link } from 'react-router'
 
 class MenuItem extends React.Component {
 
-  handleClick(event) {
-    this.props.onClick(this.props.page)
-  }
+	handleClick() {
+		const {
+			onClick,
+			page
+		} = this.props
+		onClick(page)
+	}
 
-  render() {
+	render() {
 
-    const { active, page, label } = this.props
+		const {
+			active,
+			page,
+			label
+		} = this.props
 
-    return (
-        <li className={active ? 'active' : ''}><Link to={`/dashboard/${page}`} onClick={this.handleClick.bind(this)}>{label}</Link></li>
-    );
-  }
+		return (
+			<li className={active ? 'active' : ''}><Link to={`/dashboard/${page}`} onClick={this.handleClick.bind(this)}>{label}</Link></li>
+		)
+	}
 }
 
-export default MenuItem;
+export default MenuItem

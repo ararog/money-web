@@ -7,10 +7,10 @@ import { expenses } from './expenses'
 import { users } from './users'
 
 const rootReducer = combineReducers({
-    autoRehydrated,
-    categories,
-    expenses,
-    users
+	autoRehydrated,
+	categories,
+	expenses,
+	users
 })
 
 export default rootReducer

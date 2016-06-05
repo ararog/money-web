@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import * as axios from 'axios';
+import * as axios from 'axios'
 
 export const STAGING_BASE_URL = 'http://localhost:8080/api'
 export const PROD_BASE_URL = 'http://localhost:8080/api'
@@ -16,19 +16,19 @@ export function assignAccessToken(token) {
 }
 
 export function post(path, data) {
-  return axios.post(baseUrl + path, data);
+  return axios.post(baseUrl + path, data)
 }
 
 export function get(path) {
-  return axios.get(baseUrl + path);
+  return axios.get(baseUrl + path)
 }
 
 export function delete(path) {
-  return axios.delete(baseUrl + path);
+  return axios.delete(baseUrl + path)
 }
 
 export function put(path, data) {
-  return axios.put(baseUrl + path, data);
+  return axios.put(baseUrl + path, data)
 }
 
 axios.interceptors.request.use(
@@ -40,5 +40,6 @@ axios.interceptors.request.use(
     return config
   },
   function (error) {
-    return Promise.reject(error);
-  });
+    return Promise.reject(error)
+  }
+)

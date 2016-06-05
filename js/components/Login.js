@@ -1,4 +1,5 @@
 import * as React from 'react';
+import _ from 'lodash'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -35,23 +36,23 @@ class Login extends React.Component {
     const {email, password} = this.state
 
     return (
-        <div className="wrapper">
-          <form className="form-signin" onSubmit={this._handleSubmit.bind(this)}>
-            <h2 className="form-signin-heading">Please login</h2>
-            <input type="text"
-                className="form-control"
-                placeholder="Email Address"
+        <div className='wrapper'>
+          <form className='form-signin' onSubmit={this._handleSubmit.bind(this)}>
+            <h2 className='form-signin-heading'>Please login</h2>
+            <input type='text'
+                className='form-control'
+                placeholder='Email Address'
                 onChange={() => this.setState({email: email})}
-                required="" autofocus="" value={email} />
+                required='' autofocus='' value={email} />
             <br/>
-            <input type="password"
-                className="form-control"
+            <input type='password'
+                className='form-control'
                 onChange={() => this.setState({password: password})}
-                placeholder="Password" required="" value={password} />
-            <button type="submit" className="btn btn-lg btn-primary btn-block">Login</button>
+                placeholder='Password' required='' value={password} />
+            <button type='submit' className='btn btn-lg btn-primary btn-block'>Login</button>
           </form>
         </div>
-    );
+    )
   }
 }
 
