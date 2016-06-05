@@ -1,4 +1,4 @@
-import { post } from './api'
+import { post, assignAccessToken } from './api'
 
 import {
 	LOGIN,
@@ -16,8 +16,8 @@ export function login(email, password) {
 		return post('/auth', {
 			email: email,
 			password: md5(password)
-		}).then(data => {
-			dispatch(loginSuccess(data))
+		}).then(response => {
+			dispatch(loginSuccess(response))
 		}).catch(err => {
 			dispatch(loginError(err))
 		})
@@ -30,11 +30,12 @@ function startLogin() {
 	}
 }
 
-function loginSuccess(data) {
+function loginSuccess(response) {
+	assignAccessToken(response.data.auth_token)
 	return {
 		type: LOGIN_SUCCESS,
 		payload: {
-			account: data
+			account: response.data
 		}
 	}
 }

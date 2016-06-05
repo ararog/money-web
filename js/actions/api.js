@@ -19,11 +19,11 @@ export function post(path, data) {
   return axios.post(baseUrl + path, data)
 }
 
-export function get(path) {
-  return axios.get(baseUrl + path)
+export function get(path, params) {
+  return axios.get(baseUrl + path, params)
 }
 
-export function delete(path) {
+export function del(path) {
   return axios.delete(baseUrl + path)
 }
 

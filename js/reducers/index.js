@@ -1,16 +1,13 @@
 'use strict'
 
-import { combineReducers } from 'redux'
 import { autoRehydrated } from './persist'
 import { categories } from './categories'
 import { expenses } from './expenses'
-import { users } from './users'
+import { user } from './user'
 
-const rootReducer = combineReducers({
+module.exports = {
 	autoRehydrated,
 	categories,
 	expenses,
-	users
-})
-
-export default rootReducer
+	user
+}

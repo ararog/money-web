@@ -36,8 +36,8 @@ class Expenses extends React.Component {
 		this._paginate(1)
 	}
 
-	_handleSelect(event, selectedEvent) {
-		this._paginate(selectedEvent.eventKey)
+	_handleSelect(event) {
+		this._paginate(event)
 	}
 
 	_paginate(page) {
@@ -49,35 +49,35 @@ class Expenses extends React.Component {
 		let itemCount = expenses.total / 10
 		var items = expenses.items.map(expense => {
 			return (
-				<TableRow key={id} {...expense} history={history} />
+				<TableRow key={expense.id} {...expense} history={history} />
 			)
 		})
 
 		return (
 			<div className='container'>
-			<div className='page-header'>
-			<h1>Expenses</h1>
-			</div>
-			<table className='table table-striped'>
-				<thead>
-					<tr>
-						<th>Description</th>
-						<th>Amount</th>
-					</tr>
-				</thead>
-				<tbody>
-					{items}
-				</tbody>
-			</table>
-			<Pagination
-				bsSize='medium'
-				first={true}
-				last={true}
-				next={true}
-				prev={true}
-				items={itemCount}
-				activePage={expense.page}
-				onSelect={this._handleSelect.bind(this)} />
+				<div className='page-header'>
+					<h1>Expenses</h1>
+				</div>
+				<table className='table table-striped'>
+					<thead>
+						<tr>
+							<th>Description</th>
+							<th>Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						{items}
+					</tbody>
+				</table>
+				<Pagination
+					bsSize='medium'
+					first={true}
+					last={true}
+					next={true}
+					prev={true}
+					items={itemCount}
+					activePage={expenses.page}
+					onSelect={this._handleSelect.bind(this)} />
 			</div>
 		)
 	}

@@ -8,15 +8,15 @@ const initialState = {
 	fetchingData: false,
 	error: undefined,
 	isLogged: false,
-	account: []
+	account: null
 }
 
-export function users(state = initialState, action) {
+export function user(state = initialState, action) {
 	let { type, payload } = action
 
 	switch (type) {
 		case LOGIN: {
-			return {...state, fetchingData: true, isLogged: false}
+			return {...state, fetchingData: true, isLogged: false, error: undefined}
 		}
 		case LOGIN_SUCCESS: {
 			return {...state, fetchingData: false, isLogged: true, account: payload.account}

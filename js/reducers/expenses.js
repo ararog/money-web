@@ -27,7 +27,7 @@ const initialState = {
 	page: 0,
 	total: 0,
 	overview: [],
-	expenses: []
+	items: []
 }
 
 export function expenses(state = initialState, action) {
@@ -35,7 +35,7 @@ export function expenses(state = initialState, action) {
 
 	switch (type) {
 		case LOAD_OVERVIEW: {
-			return {...state, fetchingData: true, reloading: payload.reloading}
+			return {...state, fetchingData: true}
 		}
 		case LOAD_OVERVIEW_SUCCESS: {
 			return {...state, fetchingData: false, overview: payload.overview}

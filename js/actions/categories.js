@@ -8,11 +8,12 @@ import {
 
 export function loadCategories() {
 	return dispatch => {
-		
+
 		dispatch(startFetchingCategories())
 
-		return get('/categories').then(data => {
-			dispatch(fetchCategoriesSuccess(data))
+		return get('/categories')
+		.then(response => {
+			dispatch(fetchCategoriesSuccess(response.data))
 		}).catch(err => {
 			dispatch(fetchCategoriesError(err))
 		})

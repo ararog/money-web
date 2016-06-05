@@ -5,10 +5,10 @@ export function autoRehydrated(state=false, action) {
 
 	switch(type) {
 		case 'persist/REHYDRATE': {
-			let { clapitAccountData = {} } = payload
-			let { accessToken = null } = clapitAccountData
+			let { user = {} } = payload
+			let { account = null } = user
 
-			assignAccessToken(accessToken)
+			assignAccessToken(account.auth_token)
 
 			return true
 		}

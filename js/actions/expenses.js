@@ -28,8 +28,8 @@ export function fetchExpenses(page = 0) {
 
 		return get('/expenses', {
 			params: {page: page}
-		}).then(data => {
-			dispatch(fetchExpensesSuccess(data))
+		}).then(response => {
+			dispatch(fetchExpensesSuccess(response.data))
 		}).catch(err => {
 			dispatch(fetchExpensesError(err))
 		})
@@ -69,8 +69,9 @@ export function loadOverview() {
 
 		dispatch(startFetchingOverview())
 
-		return get('/expenses/overview').then(data => {
-			dispatch(fetchOverviewSuccess(data))
+		return get('/expenses/overview')
+		.then(response => {
+			dispatch(fetchOverviewSuccess(response.data))
 		}).catch(err => {
 			dispatch(fetchOverviewError(err))
 		})
@@ -106,8 +107,9 @@ export function loadExpenseById(id) {
 
 		dispatch(startFetchingExpense(id))
 
-		return get(`/expenses/{id}`).then(data => {
-			dispatch(fetchExpenseSuccess(data))
+		return get(`/expenses/${id}`)
+		.then(response => {
+			dispatch(fetchExpenseSuccess(response.data))
 		}).catch(err => {
 			dispatch(fetchExpenseError(err))
 		})

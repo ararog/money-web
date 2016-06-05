@@ -2,33 +2,42 @@ import * as React from 'react';
 import _ from 'lodash'
 
 import { bindActionCreators } from 'redux'
+import { routerActions } from 'react-router-redux'
 import { connect } from 'react-redux'
 
-import * as usersActions from '../actions/users'
+import * as userActions from '../actions/user'
 
-import * from '../../css/login.scss'
+import '../../css/login.scss'
 
 class Login extends React.Component {
 
   constructor(props) {
-      super(props)
-      this.state = {
-          email: '',
-          password: ''
-      }
+    super(props)
+    this.state = {
+      email: '',
+      password: ''
+    }
   }
 
-  componentWillReceiveProps(nextProps) {
+	componentWillMount() {
+		this.ensureNotLoggedIn(this.props)
+	}
 
-      if(nextProps.isLogged)
-        this.props.history.replaceState(null, '/dashboard/overview')
-  }
+	componentWillReceiveProps(nextProps) {
+		this.ensureNotLoggedIn(nextProps)
+	}
+
+	ensureNotLoggedIn(props) {
+		console.log(props)
+		const { user, replace, location } = props
+		if (user.isLogged) {
+			replace(location.query.redirect)
+		}
+	}
 
   _handleSubmit(event) {
     event.preventDefault()
-
     const {email, password} = this.state
-
     this.props.login(email, password)
   }
 
@@ -36,33 +45,33 @@ class Login extends React.Component {
     const {email, password} = this.state
 
     return (
-        <div className='wrapper'>
-          <form className='form-signin' onSubmit={this._handleSubmit.bind(this)}>
-            <h2 className='form-signin-heading'>Please login</h2>
-            <input type='text'
-                className='form-control'
-                placeholder='Email Address'
-                onChange={() => this.setState({email: email})}
-                required='' autofocus='' value={email} />
-            <br/>
-            <input type='password'
-                className='form-control'
-                onChange={() => this.setState({password: password})}
-                placeholder='Password' required='' value={password} />
-            <button type='submit' className='btn btn-lg btn-primary btn-block'>Login</button>
-          </form>
-        </div>
+      <div className='wrapper'>
+        <form className='form-signin' onSubmit={this._handleSubmit.bind(this)}>
+          <h2 className='form-signin-heading'>Please login</h2>
+          <input type='text'
+            className='form-control'
+            placeholder='Email Address'
+            onChange={(e) => this.setState({email: e.target.value})}
+            required='' autofocus='' value={email} />
+          <br/>
+          <input type='password'
+            className='form-control'
+            onChange={(e) => this.setState({password: e.target.value})}
+            placeholder='Password' required='' value={password} />
+          <button type='submit' className='btn btn-lg btn-primary btn-block'>Login</button>
+        </form>
+      </div>
     )
   }
 }
 
 function stateToProps(state) {
-  let { users } = state
-  return { users }
+  let { user } = state
+  return { user }
 }
 
 function dispatchToProps(dispatch) {
-  let actions = _.extend({}, usersActions)
+  let actions = _.extend({}, userActions, {replace: routerActions.replace})
   return bindActionCreators(actions, dispatch)
 }
 

@@ -17,16 +17,18 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+				/*
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
                 warnings: false
             }
         })
+				*/
     ],
     module: {
         loaders: [
-            {test: /\.js$/, loader: 'babel' },
-            {test: require.resolve('chart.js'), loader: 'imports?this=>window'}, 
+            {exclude: /localforage/, test: /\.js$/, loader: 'babel' },
+            {test: require.resolve('chart.js'), loader: 'imports?this=>window'},
             {test: /\.scss$/, loader: 'style!css!sass?includePaths[]=' + bourbon }
         ]
     }

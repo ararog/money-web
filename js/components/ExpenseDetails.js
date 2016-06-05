@@ -49,7 +49,6 @@ class ExpenseDetails extends React.Component {
 
 	_handleDelete(event) {
 		event.preventDefault()
-
 		this.props.deleteExpense(this.props.params.id)
 	}
 
@@ -68,7 +67,7 @@ class ExpenseDetails extends React.Component {
 							className='form-control'
 							id='description'
 							placeholder='Description'
-							onChange={() => this.setState({description: description})}
+							onChange={(e) => this.setState({description: e.target.value})}
 							value={description} />
 					</div>
 					<div class='form-group'>
@@ -77,7 +76,7 @@ class ExpenseDetails extends React.Component {
 							className='form-control'
 							id='amount'
 							placeholder='0.00'
-							onChange={() => this.setState({amount:amount})}
+							onChange={(e) => this.setState({amount: e.target.value})}
 							value={amount} />
 					</div>
 					<div className='form-group'>
@@ -86,7 +85,7 @@ class ExpenseDetails extends React.Component {
 							id='comment'
 							className='form-control'
 							rows='3'
-							onChange={() => this.setState({comment: comment})}
+							onChange={(e) => this.setState({comment: e.target.value})}
 							value={comment}/>
 					</div>
 					<button type='button' onClick={this._handleSave.bind(this)} className='btn btn-primary'>Save</button>

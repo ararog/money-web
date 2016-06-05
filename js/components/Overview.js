@@ -35,11 +35,12 @@ class Overview extends React.Component {
 		let amounts = []
 
 		if(expenses.overview.pending) {
+			let key = 1
 			pendingItems = expenses.overview.pending.map(pending => {
 				return (
-					<div className='col-xs-6 col-md-3'>
-					<h1>{pending.total.toFixed(2)}</h1>
-					<p>{pending.name}</p>
+					<div key={key++} className='col-xs-6 col-md-3'>
+						<h1>{pending.total.toFixed(2)}</h1>
+						<p>{pending.name}</p>
 					</div>
 				)
 			})
@@ -81,7 +82,6 @@ class Overview extends React.Component {
 				</div>
 
 				<h3>Total of expenses by category on latest 6 months</h3>
-				{lastMonthsChart}
 			</div>
 		)
 	}
