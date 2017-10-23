@@ -15,6 +15,9 @@ class ExpenseDetails extends React.Component {
 			amount: 0,
 			comment: ''
 		}
+
+		this._handleSave = this._handleSave.bind(this)
+		this._handleDelete = this._handleDelete.bind(this)
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -88,8 +91,8 @@ class ExpenseDetails extends React.Component {
 							onChange={(e) => this.setState({comment: e.target.value})}
 							value={comment}/>
 					</div>
-					<button type='button' onClick={this._handleSave.bind(this)} className='btn btn-primary'>Save</button>
-					<button type='button' onClick={this._handleDelete.bind(this)} className='btn btn-danger'>Delete</button>
+					<button type='button' onClick={this._handleSave} className='btn btn-primary'>Save</button>
+					<button type='button' onClick={this._handleDelete} className='btn btn-danger'>Delete</button>
 				</form>
 			</div>
 		)

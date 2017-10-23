@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 import _ from 'lodash'
 
 import { bindActionCreators } from 'redux'
@@ -17,6 +17,8 @@ class Login extends React.Component {
       email: '',
       password: ''
     }
+
+    this._handleSubmit = this._handleSubmit.bind(this)
   }
 
 	componentWillMount() {
@@ -45,7 +47,7 @@ class Login extends React.Component {
 
     return (
       <div className='wrapper'>
-        <form className='form-signin' onSubmit={this._handleSubmit.bind(this)}>
+        <form className='form-signin' onSubmit={this._handleSubmit}>
           <h2 className='form-signin-heading'>Please login</h2>
           <input type='text'
             className='form-control'

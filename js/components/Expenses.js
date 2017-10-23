@@ -9,6 +9,12 @@ import * as expensesActions from '../actions/expenses'
 
 class TableRow extends React.Component {
 
+	constructor(props) {
+		super(props)
+
+		this._itemClicked = this._itemClicked.bind(this)
+	}
+
 	_itemClicked() {
 		const { id, history } = this.props
 		history.pushState(
@@ -18,7 +24,7 @@ class TableRow extends React.Component {
 	render() {
 		const { description, amount } = this.props
 		return (
-			<tr onClick={this._itemClicked.bind(this)}>
+			<tr onClick={this._itemClicked}>
 				<td>{description}</td>
 				<td>{amount}</td>
 			</tr>
@@ -30,6 +36,8 @@ class Expenses extends React.Component {
 
 	constructor(props) {
 		super(props)
+
+		this._handleSelect = this._handleSelect.bind(this)
 	}
 
 	componentDidMount() {
@@ -77,7 +85,7 @@ class Expenses extends React.Component {
 					prev={true}
 					items={itemCount}
 					activePage={expenses.page}
-					onSelect={this._handleSelect.bind(this)} />
+					onSelect={this._handleSelect} />
 			</div>
 		)
 	}

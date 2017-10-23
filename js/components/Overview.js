@@ -82,6 +82,9 @@ class Overview extends React.Component {
 				</div>
 
 				<h3>Total of expenses by category on latest 6 months</h3>
+				<div className='row'>
+					{lastMonthsChart}
+				</div>
 			</div>
 		)
 	}
